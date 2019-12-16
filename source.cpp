@@ -88,12 +88,13 @@ double randf(double a, double b) {
 	return a + r01 * (b - a);
 }
 
+
 // flag определякт нужно ли выводить парамтры параметры
 //double max = 0.0, double middle = 0.0, bool mutation
 void print_osob(int id, Osob osob, double max = 0.0, double middle = 0.0, bool mutation = false, bool flag = false) {
 
 	if (flag) {
-		std::cout << std::setw(4) << id << " | "
+		std::cout << std::setw(5) << id << " | "
 			<< std::fixed
 			<< std::setw(10) << osob.x << " | "
 			<< std::setw(10) << osob.y << " | "
@@ -103,7 +104,7 @@ void print_osob(int id, Osob osob, double max = 0.0, double middle = 0.0, bool m
 			<< std::setw(10) << (mutation ? "+" : "-") << std::endl;
 	}
 	else {
-		std::cout << std::setw(4) << " " << " | "
+		std::cout << std::setw(5) << " " << " | "
 			<< std::fixed
 			<< std::setw(10) << osob.x << " | "
 			<< std::setw(10) << osob.y << " | "
@@ -123,7 +124,10 @@ void print_population(Population population, int counter) {
 			print_osob(counter, osob, population.better_osob().fxy, population.middle(), population.mutation, true);
 			is_first = false;
 		}
-		print_osob(counter, osob);
+		else {
+			print_osob(counter, osob);
+		}
+		
 	}
 	//std::cout << std::endl;
 }
@@ -194,12 +198,17 @@ int main() {
 		//проверяем куда он попал.
 		if (p12 <= PMUT) {
 			is_mutation = true;
-			if (rand() % 2) {
-				osob12.x = -osob12.x;
-			}
-			else {
-				osob12.y = -osob12.y;
-			}
+
+			osob12.x = osob12.x + randf(-1., 1.);
+			if (osob12.x > 2.2)
+				osob12.x = 2.2;
+			if (osob12.x < -2.2)
+				osob12.x = -2.2;
+			osob12.y = osob12.y + randf(-1., 1.);
+			if (osob12.y > 2.2)
+				osob12.y = 2.2;
+			if (osob12.y < -2.2)
+				osob12.y = -2.2;
 		}
 
 		//Берем случ от 0 до 1 для osob21
@@ -207,12 +216,18 @@ int main() {
 		//проверяем куда он попал.
 		if (p21 <= PMUT) {
 			is_mutation = true;
-			if (rand() % 2) {
-				osob21.x = -osob21.x;
-			}
-			else {
-				osob21.y = -osob21.y;
-			}
+			
+				osob21.x = osob21.x + randf(-1., 1.);
+				if (osob21.x > 2.2)
+					osob21.x = 2.2;
+				if (osob21.x < -2.2)
+					osob21.x = -2.2;
+				osob21.y = osob21.y + randf(-1., 1.);
+				if (osob21.y > 2.2)
+					osob21.y = 2.2;
+				if (osob21.y < -2.2)
+					osob21.y = -2.2;
+			
 		}
 
 
